@@ -217,6 +217,24 @@ content:
             fields:
               - { name: handle, label: Handle, type: string }
               - { name: link, label: Link (leave empty to hide), type: string }
+      - name: store
+        label: Store page
+        description: "Opens when Store is clicked in the top menu. For now it only shows a label. The address is .../#store"
+        type: object
+        fields:
+          - name: show_in_menu
+            label: Show "Store" in the top menu
+            type: boolean
+          - name: menu_name
+            label: Menu name
+            type: string
+          - name: label
+            label: Big label
+            type: string
+            description: Square brackets are dimmed automatically, e.g. [Restricted]
+          - name: sublabel
+            label: Small line under it
+            type: string
       - name: sound
         label: Sound (optional)
         description: A looping track visitors can switch on from the top bar ("Sound [Off]"). It never plays by itself. Leave the file empty to hide the button.

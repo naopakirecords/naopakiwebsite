@@ -19,7 +19,8 @@ Editor (no code) ... https://app.pagescms.org
 Owner account ...... GitHub "naopakirecords" (the company account)
 
 - The site is one page (Work, About, Contact) plus a project view that
-  opens when you click a project.
+  opens when you click a project, and a Store page (top menu "Store",
+  address .../#store) that for now only shows "[RESTRICTED] WIP".
 - It is hosted for free on GitHub Pages. Every change saved to the repo
   goes live by itself within 1-2 minutes.
 - All changes must be made from the company account (naopakirecords),
@@ -112,6 +113,14 @@ In the editor's left menu you'll find:
        - Email: shown big and clickable.
        - Instagram / TikTok / YouTube: handle (e.g. @naopaki) + full
          profile link. Leave the link EMPTY to hide that row.
+     Store page
+       - Show "Store" in the top menu: on/off (off hides the menu item
+         and the page).
+       - Menu name (default "Store"), big label (default "[Restricted]",
+         square brackets are dimmed automatically) and the small line
+         under it (default "WIP").
+       - The page has nothing else on it yet. When the real store is
+         built, update this section.
      Sound (optional)
        - Upload a looping track (mp3, under ~5 MB). A "Sound [Off]"
          button then appears in the top bar. It NEVER plays by itself:
@@ -220,7 +229,8 @@ which can't make that mistake.
 Plain HTML/CSS/JavaScript. No build step, no libraries, nothing to
 install.
 
-  index.html ............ the page structure (sections, menu, footer)
+  index.html ............ the page structure (sections, menu, store
+                          placeholder, footer)
   css/style.css ......... all styling. Brand colours are at the top:
                           Night #0A0B0D (background), Bone #EEEDE7 (text)
   js/main.js ............ loads the content files and runs everything:
@@ -297,6 +307,9 @@ I want to see the intro again
 8. CHANGE LOG (newest first). Add a line for every change.
 -------------------------------------------------------------------------
 
+2026-11-24  Store tab added to the top menu: opens a placeholder page
+            (#store) showing "[RESTRICTED] WIP". Texts and menu
+            visibility editable in Pages CMS (Homepage -> Store page).
 2026-11-24  Photo colours: each project can be Original / B&W / Crushed
             B&W (cover + photos inside). Site-wide cover default set to
             Original colours. Grid/phone covers no longer forced to B&W.

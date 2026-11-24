@@ -433,6 +433,24 @@ section { padding: 0 var(--pad); }
 .bar__sound span { margin-left: 4px; }
 .bar__sound[aria-pressed="true"] { color: var(--bone); }
 
+/* ---------- store (placeholder page at #store) ---------- */
+.store {
+  position: fixed; inset: 0; z-index: 45;          /* under the top bar, so the menu still works */
+  background: var(--night);
+  display: grid; place-items: center; text-align: center;
+  padding: var(--bar-h) var(--pad) 0;
+}
+.store__label {
+  margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: -.04em; line-height: .85;
+  font-size: clamp(44px, 11vw, 190px); color: var(--bone);
+  animation: store-flicker 6s steps(1) infinite;
+}
+.store__label .sep { margin: 0 .04em; }
+.store__sub { margin: 22px 0 0; color: var(--dim); letter-spacing: .4em; font-size: 12px; }
+@keyframes store-flicker { 0%, 91%, 100% { opacity: 1; } 92% { opacity: .15; } 93% { opacity: 1; } 95% { opacity: .4; } 96% { opacity: 1; } }
+.bar__nav a.is-active::before, .bar__nav a.is-active::after { opacity: 1; }
+@media (max-width: 420px) { .bar__nav { gap: 12px; } }
+
 /* separators in editable texts */
 .sep { color: var(--dim); margin: 0 .5em; }
 
@@ -441,6 +459,7 @@ section { padding: 0 var(--pad); }
   .hero__logo.is-glitching .hero__ghost { opacity: 0 !important; }
   .fx-hover-glitch .work__item a:hover, .fx-hover-glitch .work__item a:hover .work__title { animation: none !important; }
   .intro img { opacity: 1; }
+  .store__label { animation: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -36,5 +36,11 @@
       "handle": "@naopaki",
       "link": "https://youtube.com/"
     }
+  },
+  "store": {
+    "show_in_menu": true,
+    "menu_name": "Store",
+    "label": "[Restricted]",
+    "sublabel": "WIP"
   }
 }

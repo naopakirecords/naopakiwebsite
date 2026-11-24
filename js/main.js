@@ -174,6 +174,28 @@
     setTimeout(tick, 2500);
   }
 
+  /* ---------- store (#store): placeholder page, texts + menu item editable ---------- */
+  (function store() {
+    const cfg = (site && site.store) || {};
+    const panel = $("#store"), link = $("#nav-store");
+    if (cfg.show_in_menu === false) { link.remove(); }
+    if (cfg.label && String(cfg.label).trim()) {
+      $("#store-label").innerHTML = esc(String(cfg.label).trim()).replace(/(\[|\])/g, '<span class="sep">$1</span>');
+    }
+    if (cfg.sublabel != null && String(cfg.sublabel).trim() !== "") $("#store-sub").textContent = String(cfg.sublabel).trim();
+    if (cfg.menu_name && String(cfg.menu_name).trim()) link.textContent = String(cfg.menu_name).trim();
+    const sync = () => {
+      const on = location.hash === "#store" && cfg.show_in_menu !== false;
+      panel.hidden = !on;
+      link.classList.toggle("is-active", on);
+      document.body.classList.toggle("is-store", on);
+      if (on) document.title = "Store — NAOPAKI";
+      else if (!location.hash.startsWith("#work/")) document.title = "NAOPAKI — Visual Works";
+    };
+    window.addEventListener("hashchange", sync);
+    sync();
+  })();
+
   /* ---------- hero slideshow ---------- */
   (function slideshow() {
     const box = $("#hero-slides");

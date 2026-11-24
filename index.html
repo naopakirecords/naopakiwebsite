@@ -11,7 +11,7 @@
   <meta property="og:image" content="assets/brand/og-image.jpg">
   <link rel="icon" type="image/png" href="assets/brand/favicon.png">
   <link rel="preload" href="assets/brand/PirataOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -28,9 +28,18 @@
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
+      <a href="#store" id="nav-store">Store</a>
       <button class="bar__sound" id="sound-toggle" type="button" aria-pressed="false" hidden>Sound <span>[Off]</span></button>
     </nav>
   </header>
+
+  <!-- Store: placeholder page, opened by #store (texts editable in Pages CMS) -->
+  <section class="store" id="store" hidden aria-labelledby="store-label">
+    <div class="store__inner">
+      <p class="store__label" id="store-label"><span class="sep">[</span>Restricted<span class="sep">]</span></p>
+      <p class="store__sub mono" id="store-sub">WIP</p>
+    </div>
+  </section>
 
   <main id="top">
     <!-- ============ HERO ============ -->
@@ -144,6 +153,6 @@
   </div>
 
   <!-- Content (projects, slideshow, About, contact) lives in content/*.json and is edited with Pages CMS -->
-  <script src="js/main.js?v=7"></script>
+  <script src="js/main.js?v=8"></script>
 </body>
 </html>
