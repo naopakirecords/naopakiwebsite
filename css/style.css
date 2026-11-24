@@ -38,6 +38,7 @@ body {
   overflow-x: hidden;
 }
 body.is-locked { overflow: hidden; }
+[hidden] { display: none !important; }
 img, video, iframe { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -109,6 +110,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .hero__slide.is-on { opacity: .55; transform: scale(1); }
 .hero__slides.is-bw .hero__slide { filter: grayscale(1) contrast(1.2); }
+.hero__slides.is-crushed .hero__slide { filter: contrast(1.65) brightness(.82) saturate(.85); }
+.hero__slides.is-bw.is-crushed .hero__slide { filter: grayscale(1) contrast(1.75) brightness(.82); }
+.hero__slides[data-transition="cut"] .hero__slide,
+.hero__slides[data-transition="flash"] .hero__slide { transition: none; transform: none; }
+.hero__slides[data-transition="cut"] .hero__slide.is-on,
+.hero__slides[data-transition="flash"] .hero__slide.is-on { opacity: .62; }
+/* camera-flash frame between slides (Bone, from the brand palette) */
+.hero__flash { position: absolute; inset: 0; background: var(--bone); opacity: 0; pointer-events: none; }
+.hero__flash.is-on { animation: flash .32s ease-out; }
+@keyframes flash { 0% { opacity: .85; } 100% { opacity: 0; } }
 .hero__slides::after { /* keeps the logo readable on bright photos */
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(ellipse at center, rgba(10,11,13,.15) 0%, rgba(10,11,13,.65) 100%);
@@ -116,6 +127,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (prefers-reduced-motion: reduce) { .hero__slide { transition: none; transform: none; } }
 .hero__logo { position: relative; margin: 0; width: min(86vw, 980px); }
 .hero__logo img { width: 100%; height: auto; }
+.hero__ghost { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.hero__logo.is-glitching > img:first-child { animation: logo-jit .28s steps(3) 1; }
+.hero__logo.is-glitching .hero__ghost--a { opacity: .55; transform: translate(-7px, 2px); clip-path: inset(18% 0 52% 0); }
+.hero__logo.is-glitching .hero__ghost--b { opacity: .45; transform: translate(6px, -2px); clip-path: inset(61% 0 12% 0); filter: brightness(1.2); }
+@keyframes logo-jit { 0% { transform: translate(2px, -1px); } 33% { transform: translate(-3px, 1px) skewX(-4deg); } 66% { transform: translate(1px, 0); } 100% { transform: none; } }
 .hero__tag { position: relative; margin: 0; color: var(--bone); }
 .hero__tag span { color: var(--dim); margin: 0 .6em; }
 .hero__corner { position: absolute; bottom: 24px; color: var(--dim); }
@@ -145,6 +161,7 @@ section { padding: 0 var(--pad); }
   margin: 0;
   font-size: clamp(44px, 9vw, 140px);
   line-height: .82; font-weight: 700; letter-spacing: -.04em;
+  text-transform: uppercase;
 }
 .sec-head__title sup { font-size: 14px; letter-spacing: .08em; vertical-align: top; margin-left: 6px; font-weight: 400; }
 .sec-head__controls { display: flex; gap: 22px; flex-wrap: wrap; }
@@ -220,6 +237,8 @@ section { padding: 0 var(--pad); }
 .work__list[data-view="grid"] .work__thumb { order: 0; }
 
 /* ---------- about ---------- */
+.about { position: relative; overflow: hidden; }
+.about > *:not(.about__bigword) { position: relative; }
 .about__statement {
   margin: clamp(30px, 5vw, 60px) 0 0;
   max-width: 22ch;
@@ -339,6 +358,93 @@ section { padding: 0 var(--pad); }
   .project__media > *, .project__media > .is-portrait, .project__media > .is-solo { grid-column: span 1; width: 100%; }
   .project__close .dim, .project__index { display: none; }
   .project__nav { grid-column: 3; }
+}
+
+/* =========================================================================
+   LOOK & EFFECTS — switched on/off from Pages CMS ("Look & effects"),
+   via classes on <html>. Colours stay inside the brand palette.
+   ========================================================================= */
+
+/* grain strength */
+.fx-grain-off .grain { display: none; }
+.fx-grain-strong .grain { opacity: .17; }
+
+/* scan lines + slow VHS tracking band */
+.scan { display: none; }
+.fx-scanlines .scan {
+  display: block; position: fixed; inset: 0; z-index: 99; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,.22) 0 1px, transparent 1px 3px);
+}
+.fx-scanlines .scan::after {
+  content: ""; position: absolute; left: 0; right: 0; top: -20%; height: 14%;
+  background: linear-gradient(to bottom, transparent, rgba(238,237,231,.05) 45%, rgba(238,237,231,.09) 50%, transparent);
+  animation: tracking 9s linear infinite;
+}
+@keyframes tracking { to { top: 110%; } }
+
+/* gothic section titles (Pirata One) */
+.fx-gothic-heads .sec-head__title { font-family: var(--black-letter); font-weight: 400; letter-spacing: 0; text-transform: none; line-height: .9; }
+
+/* glitchy hover on the work list */
+.fx-hover-glitch .work__list[data-view="list"] .work__item a:hover .work__title,
+.fx-hover-glitch .work__list[data-view="grid"] .work__item a:hover .work__title { animation: title-jit .34s steps(2) 1; }
+.fx-hover-glitch .work__list[data-view="list"] .work__item a:hover { animation: row-flick .26s steps(1) 1; }
+@keyframes title-jit {
+  0%   { transform: translate(-3px, 1px); clip-path: inset(0 0 45% 0); }
+  25%  { transform: translate(4px, -1px) skewX(-10deg); clip-path: none; }
+  50%  { transform: translate(-2px, 0); clip-path: inset(40% 0 0 0); }
+  75%  { transform: translate(1px, 1px); clip-path: none; }
+  100% { transform: none; }
+}
+@keyframes row-flick { 0% { background: var(--night); color: var(--bone); } 50% { background: var(--white); color: var(--black); } 100% { background: var(--bone); } }
+
+/* photo tone: the hover preview in list view, and grid covers on hover */
+.tone-natural .hover-preview { filter: none; }
+.tone-bw .hover-preview { filter: grayscale(1) contrast(1.15); }
+.tone-crushed .hover-preview { filter: grayscale(1) contrast(1.8) brightness(.85); }
+.tone-bw .work__list[data-view="grid"] .work__item a:hover .work__thumb { filter: grayscale(1) contrast(1.15); }
+.tone-crushed .work__list[data-view="grid"] .work__item a:hover .work__thumb { filter: grayscale(1) contrast(1.8) brightness(.9); }
+
+/* crosshair cursor (Bone with a Night outline) */
+.fx-cursor, .fx-cursor * {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='%230A0B0D' stroke-width='4'%3E%3Cpath d='M16 2v10M16 20v10M2 16h10M20 16h10'/%3E%3C/g%3E%3Cg stroke='%23EEEDE7' stroke-width='1.5'%3E%3Cpath d='M16 2v10M16 20v10M2 16h10M20 16h10'/%3E%3C/g%3E%3Ccircle cx='16' cy='16' r='1.5' fill='%23EEEDE7'/%3E%3C/svg%3E") 16 16, crosshair !important;
+}
+
+/* giant cropped background word in About */
+.about__bigword {
+  position: absolute; left: -2vw; right: -10vw; bottom: -.12em;
+  white-space: nowrap; pointer-events: none; user-select: none;
+  font-size: clamp(120px, 26vw, 420px); line-height: .8;
+  color: transparent; -webkit-text-stroke: 1px rgba(238,237,231,.13);
+}
+.about__bigword.is-gothic { font-family: var(--black-letter); }
+.about__bigword.is-sans { font-family: var(--sans); font-weight: 700; letter-spacing: -.05em; text-transform: uppercase; }
+
+/* black-screen intro (first visit only) */
+.intro {
+  position: fixed; inset: 0; z-index: 200; background: var(--black);
+  display: grid; place-items: center; transition: opacity .6s ease;
+}
+.intro img { width: 72px; height: 72px; opacity: 0; animation: faulty-light 1.5s steps(1) forwards; }
+.intro.is-out { opacity: 0; pointer-events: none; }
+@keyframes faulty-light {
+  0% { opacity: 0; } 18% { opacity: 1; } 22% { opacity: 0; } 34% { opacity: .9; } 38% { opacity: .1; }
+  46% { opacity: 1; } 49% { opacity: 0; } 58% { opacity: 1; } 100% { opacity: 1; }
+}
+
+/* sound toggle in the top bar */
+.bar__sound { color: var(--dim); font: inherit; letter-spacing: inherit; text-transform: inherit; }
+.bar__sound span { margin-left: 4px; }
+.bar__sound[aria-pressed="true"] { color: var(--bone); }
+
+/* separators in editable texts */
+.sep { color: var(--dim); margin: 0 .5em; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scan::after, .hero__logo.is-glitching > img:first-child, .intro img { animation: none !important; }
+  .hero__logo.is-glitching .hero__ghost { opacity: 0 !important; }
+  .fx-hover-glitch .work__item a:hover, .fx-hover-glitch .work__item a:hover .work__title { animation: none !important; }
+  .intro img { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: reduce) {

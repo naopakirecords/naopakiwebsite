@@ -19,7 +19,39 @@
       return r.ok ? await r.json() : null;
     } catch (e) { return null; }   // e.g. index.html opened straight from disk
   }
-  const [rawProjects, site] = await Promise.all([getJSON("content/projects.json"), getJSON("content/site.json")]);
+  const [rawProjects, site, lookFile] = await Promise.all([
+    getJSON("content/projects.json"), getJSON("content/site.json"), getJSON("content/look.json")
+  ]);
+
+  /* ---------- look & effects (content/look.json, "Look & effects" in Pages CMS) ---------- */
+  const look = Object.assign({
+    slideshow_transition: "flash", slideshow_contrast: "crushed", grain: "strong", scanlines: true,
+    logo_glitch: true, hover_glitch: true, intro: "first-visit", cursor: "crosshair",
+    gothic_headings: true, photo_tone: "crushed"
+  }, lookFile || {});
+  const html = document.documentElement;
+  html.classList.add(
+    "fx-grain-" + (look.grain || "subtle"),
+    "tone-" + (look.photo_tone || "bw")
+  );
+  html.classList.toggle("fx-scanlines", look.scanlines !== false);
+  html.classList.toggle("fx-hover-glitch", look.hover_glitch !== false);
+  html.classList.toggle("fx-gothic-heads", look.gothic_headings !== false);
+  html.classList.toggle("fx-cursor", look.cursor === "crosshair" && window.matchMedia("(pointer: fine)").matches);
+
+  /* black-screen intro: the seal flickers on like a faulty light */
+  (function intro() {
+    const el = $("#intro");
+    let seen = false;
+    try { seen = localStorage.getItem("naopaki-intro") === "seen"; } catch (e) { /* storage blocked */ }
+    const show = look.intro === "every-visit" || (look.intro === "first-visit" && !seen);
+    if (!show || reduceMotion || location.hash.startsWith("#work/")) return;
+    try { localStorage.setItem("naopaki-intro", "seen"); } catch (e) { /* ignore */ }
+    el.hidden = false;
+    setTimeout(() => el.classList.add("is-out"), 1700);
+    setTimeout(() => { el.hidden = true; }, 2400);
+    el.addEventListener("click", () => el.classList.add("is-out"));
+  })();
 
   /* a YouTube or Vimeo link (or bare ID) → { type, id } */
   function parseVideoLink(link) {
@@ -77,12 +109,76 @@
     if (tb.blur === false) root.setProperty("--bar-blur", "0px");
   }
 
+  /* ---------- editable small texts (labels, marquee, footer) ---------- */
+  const withSeps = t => esc(t).replace(/(\/|†|✝|✕|⛧|·)/g, '<span class="sep">$1</span>');
+  const tx = (site && site.texts) || {};
+  const setText = (sel, val) => { if (val != null && String(val).trim() !== "") $(sel).innerHTML = withSeps(val); };
+  setText("#txt-bar", tx.top_bar_middle);
+  setText("#txt-tagline", tx.hero_tagline);
+  setText("#txt-corner-r", tx.hero_corner_right);
+  setText("#txt-footer", tx.footer_line);
+  if (tx.hero_corner_left != null && String(tx.hero_corner_left).trim() !== "") {
+    $("#txt-corner-l").innerHTML = withSeps(tx.hero_corner_left).replace("{count}", '<span id="count-hero"></span>');
+    if (!$("#count-hero")) $("#txt-corner-l").insertAdjacentHTML("beforeend", '<span id="count-hero" hidden></span>');
+  }
+  if (tx.marquee && String(tx.marquee).trim()) {
+    const t = String(tx.marquee).trim() + " ";
+    const tr = $(".marquee__track");
+    tr.dataset.text = t;
+    tr.innerHTML = `<span>${esc(t.repeat(4))}</span><span>${esc(t.repeat(4))}</span>`;
+  }
+
+  /* giant cropped word behind About (never the brand name: the logo is only ever the SVG) */
+  (function bigWord() {
+    const el = $("#about-bigword");
+    const a = (site && site.about) || {};
+    const word = String(a.background_word == null ? "" : a.background_word).trim();
+    if (!word || /naopaki/i.test(word)) return;
+    el.textContent = word;
+    el.classList.add(a.background_word_style === "sans" ? "is-sans" : "is-gothic");
+  })();
+
+  /* optional ambient sound, muted until the visitor turns it on */
+  (function sound() {
+    const s = (site && site.sound) || {};
+    const file = path(s.file);
+    if (!file || s.enabled === false) return;
+    const btn = $("#sound-toggle");
+    const audio = new Audio(file);
+    audio.loop = true; audio.preload = "none";
+    audio.volume = Math.min(1, Math.max(0, (Number(s.volume) || 60) / 100));
+    btn.hidden = false;
+    btn.addEventListener("click", () => {
+      const on = btn.getAttribute("aria-pressed") !== "true";
+      btn.setAttribute("aria-pressed", String(on));
+      btn.querySelector("span").textContent = on ? "[On]" : "[Off]";
+      if (on) audio.play().catch(() => {}); else audio.pause();
+    });
+  })();
+
+  /* logo glitch: a split-second monochrome tear every few seconds */
+  if (look.logo_glitch !== false && !reduceMotion) {
+    const logo = $(".hero__logo");
+    const tick = () => {
+      if (!document.hidden) {
+        logo.classList.add("is-glitching");
+        setTimeout(() => logo.classList.remove("is-glitching"), 260);
+      }
+      setTimeout(tick, 3500 + Math.random() * 4000);
+    };
+    setTimeout(tick, 2500);
+  }
+
   /* ---------- hero slideshow ---------- */
   (function slideshow() {
     const box = $("#hero-slides");
     const cfg = (site && site.slideshow) || {};
     const imgs = (cfg.images || []).map(path).filter(Boolean);
     box.classList.toggle("is-bw", cfg.black_and_white !== false);
+    box.classList.toggle("is-crushed", look.slideshow_contrast === "crushed");
+    const mode = reduceMotion ? "fade" : (look.slideshow_transition || "fade");
+    box.dataset.transition = mode;
+    const flash = $("#hero-flash");
     if (!imgs.length) return;
     box.innerHTML = imgs.map((src, i) => `<div class="hero__slide${i === 0 ? " is-on" : ""}" style="background-image:url('${esc(src)}')"></div>`).join("");
     if (imgs.length < 2 || reduceMotion) return;
@@ -94,6 +190,7 @@
       slides[i].classList.remove("is-on");
       i = (i + 1) % slides.length;
       slides[i].classList.add("is-on");
+      if (mode === "flash") { flash.classList.remove("is-on"); void flash.offsetWidth; flash.classList.add("is-on"); }
     }, ms);
   })();
 

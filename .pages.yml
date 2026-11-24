@@ -29,6 +29,12 @@ media:
     output: /assets/video
     rename: safe
     extensions: [mp4, webm]
+  - name: audio
+    label: Sound
+    input: assets/audio
+    output: /assets/audio
+    rename: safe
+    extensions: [mp3, m4a, ogg]
 
 content:
   - name: projects
@@ -124,6 +130,31 @@ content:
           - name: blur
             label: Blur what's behind it
             type: boolean
+      - name: texts
+        label: Small texts (labels, marquee, footer)
+        description: "These symbols show dimmed automatically: / † ✝ ✕ ⛧ ·  Leave a box empty to keep the built-in text."
+        type: object
+        fields:
+          - name: top_bar_middle
+            label: Top bar, middle (hidden on phones)
+            type: string
+          - name: hero_tagline
+            label: Line under the logo
+            type: string
+          - name: hero_corner_left
+            label: Bottom-left corner of the homepage
+            type: string
+            description: "{count} is replaced by the number of projects, e.g. † 008"
+          - name: hero_corner_right
+            label: Bottom-right corner (scrolls down to Work)
+            type: string
+          - name: marquee
+            label: Scrolling strip text
+            type: string
+            description: Repeats endlessly. End it with a separator, e.g. "NO RULES † NO SHINE †"
+          - name: footer_line
+            label: Footer line
+            type: string
       - name: about
         label: About
         type: object
@@ -141,6 +172,17 @@ content:
           - name: approach
             label: "Column: Approach"
             type: text
+          - name: background_word
+            label: Giant background word
+            type: string
+            description: Huge outlined word cropped behind the About section. Leave empty to hide. Don't use the brand name here, as the logo is only ever the SVG (the site ignores it).
+          - name: background_word_style
+            label: Giant word font
+            type: select
+            options:
+              values:
+                - { name: gothic, label: Gothic (Pirata One) }
+                - { name: sans, label: Bold sans (Helvetica) }
       - name: contact
         label: Contact
         type: object
@@ -166,3 +208,88 @@ content:
             fields:
               - { name: handle, label: Handle, type: string }
               - { name: link, label: Link (leave empty to hide), type: string }
+      - name: sound
+        label: Sound (optional)
+        description: A looping track visitors can switch on from the top bar ("Sound [Off]"). It never plays by itself. Leave the file empty to hide the button.
+        type: object
+        fields:
+          - name: enabled
+            label: Show the sound button
+            type: boolean
+          - name: file
+            label: Sound file (mp3, keep it under ~5 MB)
+            type: file
+            options:
+              media: audio
+          - name: volume
+            label: Volume (0-100)
+            type: number
+            options:
+              min: 0
+              max: 100
+
+  - name: look
+    label: Look & effects
+    type: file
+    path: content/look.json
+    format: json
+    fields:
+      - name: slideshow_transition
+        label: Slideshow change
+        type: select
+        options:
+          values:
+            - { name: flash, label: Hard cut + camera flash }
+            - { name: cut, label: Hard cut }
+            - { name: fade, label: Soft fade }
+      - name: slideshow_contrast
+        label: Slideshow contrast
+        type: select
+        options:
+          values:
+            - { name: crushed, label: Crushed (harsh flash look) }
+            - { name: normal, label: Normal }
+      - name: photo_tone
+        label: Photo tone when hovering projects
+        type: select
+        description: The floating preview in the list, and covers in the grid on hover.
+        options:
+          values:
+            - { name: crushed, label: Crushed black & white }
+            - { name: bw, label: Black & white }
+            - { name: natural, label: Original colours }
+      - name: grain
+        label: Film grain
+        type: select
+        options:
+          values:
+            - { name: strong, label: Strong }
+            - { name: subtle, label: Subtle }
+            - { name: "off", label: "Off" }
+      - name: scanlines
+        label: Scan lines + VHS tracking band
+        type: boolean
+      - name: logo_glitch
+        label: Logo glitch every few seconds
+        type: boolean
+      - name: hover_glitch
+        label: Glitchy hover on project titles
+        type: boolean
+      - name: gothic_headings
+        label: Gothic section titles (Work / About / Contact in Pirata One)
+        type: boolean
+      - name: cursor
+        label: Mouse cursor
+        type: select
+        options:
+          values:
+            - { name: crosshair, label: Crosshair }
+            - { name: default, label: Normal arrow }
+      - name: intro
+        label: Black-screen intro (seal flickers on)
+        type: select
+        options:
+          values:
+            - { name: first-visit, label: First visit only }
+            - { name: every-visit, label: Every visit }
+            - { name: "off", label: "Off" }

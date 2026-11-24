@@ -6,7 +6,8 @@ A one-page portfolio site with a project view that opens when you click a projec
 index.html            the page
 css/style.css         all styling (brand colours are at the top)
 content/projects.json ← projects (edited with Pages CMS)
-content/site.json     ← homepage slideshow, About text, email, socials (edited with Pages CMS)
+content/site.json     ← slideshow, top bar, small texts, About, email, socials, sound (Pages CMS)
+content/look.json     ← visual effects on/off (Pages CMS → Look & effects)
 .pages.yml            the editor's setup (Pages CMS)
 js/main.js            behaviour (list/grid, filter, project view)
 assets/brand/         logo, seal, favicon, Pirata One font + licence

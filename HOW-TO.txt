@@ -33,7 +33,7 @@ Owner account ...... GitHub "naopakirecords" (the company account)
 -------------------------------------------------------------------------
 
 This is how almost everything is changed: photos, videos, projects,
-slideshow, texts, links, the top bar.
+slideshow, texts, links, the top bar, the visual effects.
 
 Getting in
   1. Go to https://app.pagescms.org
@@ -85,21 +85,59 @@ In the editor's left menu you'll find:
      Top bar (the logo + menu bar at the top)
        - Darkness: 0 = fully see-through, 100 = solid black (default 45).
        - Blur what's behind it: on/off.
+     Small texts (labels, marquee, footer)
+       - Top bar middle (hidden on phones), line under the logo, the two
+         bottom corners of the homepage, the scrolling strip (marquee)
+         and the footer line.
+       - The symbols / † ✝ ✕ ⛧ · are shown dimmed automatically.
+       - In the bottom-left corner, {count} becomes the number of
+         projects (e.g. "† {count}" shows "† 008").
+       - Leave a box empty to keep the built-in text.
      About
        - Statement: the big paragraph. Put a word between *stars* to
          make it italic, e.g. *inside out*.
        - Three columns: We make / Status / Approach. Each new line in
          the box becomes a new line on the site.
+       - Giant background word: a huge outlined word cropped behind the
+         About section (default "Inside Out"). Empty = hidden.
+         Font: Gothic (Pirata One) or Bold sans.
+         Never use the brand name here: the NAOPAKI wordmark is only
+         ever the logo SVG, so the site ignores it if typed.
      Contact
        - Email: shown big and clickable.
        - Instagram / TikTok / YouTube: handle (e.g. @naopaki) + full
          profile link. Leave the link EMPTY to hide that row.
+     Sound (optional)
+       - Upload a looping track (mp3, under ~5 MB). A "Sound [Off]"
+         button then appears in the top bar. It NEVER plays by itself:
+         visitors switch it on. Volume 0-100. Empty file = no button.
 
-  C) MEDIA
+  C) LOOK & EFFECTS
+     Switch the visual effects on/off. Everything stays within the brand
+     colours (Black, White, Night, Bone).
+       - Slideshow change: Hard cut + camera flash (a Bone flash frame
+         between slides) / Hard cut / Soft fade.
+       - Slideshow contrast: Crushed (harsh flash-photo look) / Normal.
+         (Black & white for the slideshow is under Homepage.)
+       - Photo tone when hovering projects: Crushed B&W / B&W / Original.
+       - Film grain: Strong / Subtle / Off.
+       - Scan lines + VHS tracking band: on/off.
+       - Logo glitch every few seconds: on/off (a split-second tear of
+         the logo itself, no extra colours).
+       - Glitchy hover on project titles: on/off.
+       - Gothic section titles (Work / About / Contact in Pirata One).
+       - Mouse cursor: Crosshair / Normal arrow (phones are unaffected).
+       - Black-screen intro (the seal flickers on like a faulty light):
+         First visit only / Every visit / Off. Clicking skips it.
+     Visitors whose device asks for "reduced motion" automatically get
+     no intro, no flash, no glitches and soft fades instead.
+
+  D) MEDIA
      All uploaded files, by folder:
        Project photos ........ assets/img/work
        Homepage slideshow .... assets/img/hero
        Video files ........... assets/video
+       Sound ................. assets/audio
      Use it to delete files that are no longer used.
 
 
@@ -180,10 +218,13 @@ install.
                           Night #0A0B0D (background), Bone #EEEDE7 (text)
   js/main.js ............ loads the content files and runs everything:
                           slideshow, work list/grid + filter, hover
-                          preview, project view, marquee, top bar settings
+                          preview, project view, marquee, top bar,
+                          effects (classes on <html>: fx-*, tone-*), intro,
+                          logo glitch, sound
   content/projects.json . the projects            (edited in Pages CMS)
-  content/site.json ..... slideshow, top bar, About, contact
-                                                  (edited in Pages CMS)
+  content/site.json ..... slideshow, top bar, small texts, About,
+                          contact, sound          (edited in Pages CMS)
+  content/look.json ..... effects on/off          (edited in Pages CMS)
   .pages.yml ............ defines what the editor shows. Add a field here
                           AND handle it in js/main.js to make something
                           new editable.
@@ -191,13 +232,17 @@ install.
   assets/img/work/ ...... project photos
   assets/img/hero/ ...... slideshow images
   assets/video/ ......... small video files
+  assets/audio/ ......... optional sound loop
   README.md ............. short technical readme
   HOW-TO.txt ............ this file
   .nojekyll ............. tells GitHub Pages to serve files as they are
 
 Important rules
   - Brand: the logo is always the supplied SVG, never retyped in the
-    font. Pirata One is only for project titles and accents.
+    font (never write "NAOPAKI" in Pirata One). Pirata One is for
+    project titles, section titles and accents. Colours: only Black
+    #000000, White #FFFFFF, Night #0A0B0D, Bone #EEEDE7 (plus their
+    transparencies). No other colours, including in effects.
   - After changing css/style.css or js/main.js, bump the ?v= number on
     their links at the top/bottom of index.html (e.g. ?v=5 -> ?v=6),
     otherwise visitors' browsers keep the old version.
@@ -236,11 +281,22 @@ The Work list is empty or a section looks broken
 New setting doesn't appear in the editor
   -> Reload the editor page.
 
+I want to see the intro again
+  -> It only shows on a browser's first visit. Open the site in a
+     private/incognito window, or set it to "Every visit".
+
 
 -------------------------------------------------------------------------
 8. CHANGE LOG (newest first). Add a line for every change.
 -------------------------------------------------------------------------
 
+2026-11-24  Opium-inspired look, all switchable in Pages CMS ("Look &
+            effects"): flash/hard-cut slideshow, crushed contrast, strong
+            grain, scan lines + VHS band, logo glitch, glitchy hovers,
+            gothic section titles, crosshair cursor, first-visit
+            black-screen intro, photo tone. New editable small texts
+            (labels, marquee, footer), giant background word in About,
+            optional sound toggle. Kept within the brand palette.
 2026-11-24  Added this HOW-TO.txt.
 2026-11-24  Top bar made more see-through (45% darkness + blur); darkness
             and blur editable in Pages CMS (Homepage -> Top bar).

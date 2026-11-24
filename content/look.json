@@ -1,0 +1,12 @@
+{
+  "slideshow_transition": "flash",
+  "slideshow_contrast": "crushed",
+  "grain": "strong",
+  "scanlines": true,
+  "logo_glitch": true,
+  "hover_glitch": true,
+  "intro": "first-visit",
+  "cursor": "crosshair",
+  "gothic_headings": true,
+  "photo_tone": "crushed"
+}
