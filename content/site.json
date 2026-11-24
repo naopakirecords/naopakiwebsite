@@ -1,14 +1,16 @@
 {
   "slideshow": {
     "images": [
-      "assets/img/hero/slide-01.jpg",
-      "assets/img/hero/slide-02.jpg",
-      "assets/img/hero/slide-03.jpg",
-      "assets/img/hero/slide-04.jpg",
-      "assets/img/hero/slide-05.jpg"
+      "/assets/img/hero/dsc08838.jpg",
+      "/assets/img/hero/dsc08755-1.jpg",
+      "/assets/img/hero/dsc08795.jpg",
+      "/assets/img/hero/dsc08773.jpg",
+      "/assets/img/hero/dsc08863.jpg",
+      "/assets/img/hero/dsc08770.jpg",
+      "/assets/img/hero/dsc08829.jpg"
     ],
     "seconds": 5,
-    "black_and_white": true
+    "black_and_white": false
   },
   "about": {
     "statement": "Naopaki means *inside out*. Backwards. The wrong way round. We are a two-person crew making photographs and moving images that keep the seams showing — raw light, real places, no polish for the sake of polish.",
