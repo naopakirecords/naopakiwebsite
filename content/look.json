@@ -8,5 +8,6 @@
   "intro": "first-visit",
   "cursor": "crosshair",
   "gothic_headings": true,
-  "photo_tone": "natural"
+  "photo_tone": "natural",
+  "respect_reduced_motion": true
 }

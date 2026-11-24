@@ -145,8 +145,13 @@ In the editor's left menu you'll find:
        - Mouse cursor: Crosshair / Normal arrow (phones are unaffected).
        - Black-screen intro (the seal flickers on like a faulty light):
          First visit only / Every visit / Off. Clicking skips it.
-     Visitors whose device asks for "reduced motion" automatically get
-     no intro, no flash, no glitches and soft fades instead.
+       - Respect visitors' "Reduce motion" setting (default ON):
+         phones/computers with "Reduce motion" (iPhone) or "Remove
+         animations" (Android) turned on, which battery-saver modes
+         often switch on too, get a calmer site: no intro, no flash, no
+         glitches or flicker, and the slideshow uses soft fades. The
+         slideshow and scrolling strip ALWAYS keep moving.
+         Turn it OFF to give every visitor every effect.
 
   D) MEDIA
      All uploaded files, by folder:
@@ -298,6 +303,15 @@ The Work list is empty or a section looks broken
 New setting doesn't appear in the editor
   -> Reload the editor page.
 
+Effects don't show on my phone (no flash, no glitch, no intro)
+  -> The phone has Reduce motion / Remove animations on (check
+     battery saver too):
+       iPhone: Settings -> Accessibility -> Motion -> Reduce Motion
+       Android: Settings -> Accessibility -> Remove animations
+     That's the calm mode working as intended. To force all effects for
+     everyone, turn off "Respect visitors' Reduce motion setting" in
+     Look & effects.
+
 I want to see the intro again
   -> It only shows on a browser's first visit. Open the site in a
      private/incognito window, or set it to "Every visit".
@@ -307,6 +321,9 @@ I want to see the intro again
 8. CHANGE LOG (newest first). Add a line for every change.
 -------------------------------------------------------------------------
 
+2026-11-24  Phones with Reduce motion on: slideshow and marquee now keep
+            running (soft fades); other effects pause. New switch in Look
+            & effects: "Respect visitors' Reduce motion setting".
 2026-11-24  Store tab added to the top menu: opens a placeholder page
             (#store) showing "[RESTRICTED] WIP". Texts and menu
             visibility editable in Pages CMS (Homepage -> Store page).

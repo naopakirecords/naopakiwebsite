@@ -10,7 +10,7 @@
   const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const path = v => String(v || "").trim().replace(/^\/+/, "");   // CMS may write "/assets/…"; the site lives in a sub-folder
   const lines = v => esc(v).replace(/\n/g, "<br>");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;   // phone/computer "Reduce motion" setting
 
   /* ---------- load content ---------- */
   async function getJSON(url) {
@@ -27,9 +27,11 @@
   const look = Object.assign({
     slideshow_transition: "flash", slideshow_contrast: "crushed", grain: "strong", scanlines: true,
     logo_glitch: true, hover_glitch: true, intro: "first-visit", cursor: "crosshair",
-    gothic_headings: true, photo_tone: "crushed"
+    gothic_headings: true, photo_tone: "crushed", respect_reduced_motion: true
   }, lookFile || {});
   const html = document.documentElement;
+  const reduceMotion = prefersReduced && look.respect_reduced_motion !== false;
+  html.classList.toggle("calm", reduceMotion);
   html.classList.add(
     "fx-grain-" + (look.grain || "subtle"),
     "tone-" + (look.photo_tone || "bw")
@@ -208,7 +210,7 @@
     const flash = $("#hero-flash");
     if (!imgs.length) return;
     box.innerHTML = imgs.map((src, i) => `<div class="hero__slide${i === 0 ? " is-on" : ""}" style="background-image:url('${esc(src)}')"></div>`).join("");
-    if (imgs.length < 2 || reduceMotion) return;
+    if (imgs.length < 2) return;
     const slides = $$(".hero__slide", box);
     const ms = Math.max(2, Number(cfg.seconds) || 5) * 1000;
     let i = 0;

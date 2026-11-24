@@ -312,6 +312,10 @@ content:
           values:
             - { name: crosshair, label: Crosshair }
             - { name: default, label: Normal arrow }
+      - name: respect_reduced_motion
+        label: "Respect visitors' \"Reduce motion\" setting"
+        type: boolean
+        description: "On (recommended): if a phone/computer has Reduce motion / Remove animations turned on (often switched on by battery saver too), the site skips the intro, flashes, glitches and flicker, and the slideshow uses soft fades. The slideshow and scrolling strip always keep moving. Off: everyone gets every effect."
       - name: intro
         label: Black-screen intro (seal flickers on)
         type: select
