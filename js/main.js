@@ -69,6 +69,14 @@
     }
   }
 
+  /* ---------- top bar look ---------- */
+  if (site && site.top_bar) {
+    const tb = site.top_bar, root = document.documentElement.style;
+    const n = Number(tb.darkness);
+    if (tb.darkness !== "" && tb.darkness != null && !isNaN(n)) root.setProperty("--bar-alpha", Math.min(100, Math.max(0, n)) / 100);
+    if (tb.blur === false) root.setProperty("--bar-blur", "0px");
+  }
+
   /* ---------- hero slideshow ---------- */
   (function slideshow() {
     const box = $("#hero-slides");

@@ -110,6 +110,20 @@ content:
           - name: black_and_white
             label: Show in black & white
             type: boolean
+      - name: top_bar
+        label: Top bar (logo + menu at the top)
+        type: object
+        fields:
+          - name: darkness
+            label: Darkness (0 = fully see-through, 100 = solid black)
+            type: number
+            description: Default 45.
+            options:
+              min: 0
+              max: 100
+          - name: blur
+            label: Blur what's behind it
+            type: boolean
       - name: about
         label: About
         type: object

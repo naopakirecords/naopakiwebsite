@@ -12,6 +12,10 @@
     "seconds": 5,
     "black_and_white": false
   },
+  "top_bar": {
+    "darkness": 45,
+    "blur": true
+  },
   "about": {
     "statement": "Naopaki means *inside out*. Backwards. The wrong way round. We are a two-person crew making photographs and moving images that keep the seams showing — raw light, real places, no polish for the sake of polish.",
     "we_make": "Photoshoots\nMusic videos\nVisualisers\nPress & cover art",

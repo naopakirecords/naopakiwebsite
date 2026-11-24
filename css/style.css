@@ -76,8 +76,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   padding: 0 var(--pad);
   border-bottom: 1px solid var(--line);
-  background: rgba(10, 11, 13, .94);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 11, 13, var(--bar-alpha, .45));   /* darkness is set in Pages CMS: Homepage → Top bar */
+  -webkit-backdrop-filter: blur(var(--bar-blur, 10px));
+  backdrop-filter: blur(var(--bar-blur, 10px));
 }
 .bar__seal img { width: 40px; height: 40px; transition: transform .6s cubic-bezier(.7, 0, .2, 1); }
 .bar__seal:hover img { transform: rotate(360deg); }
