@@ -15,12 +15,10 @@ assets/video/         small video files (currently a placeholder loop)
 ## Preview it on your computer
 Double-click `index.html` and it opens in your browser. Everything works offline except YouTube and Vimeo embeds.
 
-## Put it online with GitHub Pages (free)
-1. Sign in at github.com and click **New repository**. Name it `naopaki` and set it to **Public** (Pages is free only for public repos). Click **Create repository**.
-2. On the new repo page, click **uploading an existing file**. Drag in **everything inside this folder** (index.html, css, js, assets, README.md and the hidden `.nojekyll` file). Then click **Commit changes**.
-   - Windows hides files that start with a dot. If `.nojekyll` doesn't upload, it isn't critical: the site works without it.
-3. Go to **Settings → Pages**. Under *Build and deployment* choose **Deploy from a branch**, branch **main**, folder **/ (root)**, then click **Save**.
-4. Wait about a minute and refresh. The address appears at the top: `https://YOUR-USERNAME.github.io/naopaki/`
+## Where it lives
+- **Repository:** https://github.com/naopakirecords/naopakiwebsite (company account, branch `main`)
+- **Live site:** https://naopakirecords.github.io/naopakiwebsite/
+- Hosted free on GitHub Pages: **Settings → Pages → Deploy from a branch → `main` / `(root)` → Save**. The repo must stay **public** for free Pages.
 
 To update the site later, upload the changed files again in the repo (**Add file → Upload files**). The site refreshes within a minute or two.
 
