@@ -61,6 +61,11 @@ In the editor's left menu you'll find:
          Type ............ PHOTO or VIDEO (used by the All/Photo/Video filter)
          Year ............ e.g. 2026
          One short line .. optional, keep it short
+         Photo colours ... Original colours / Black & white / Crushed B&W.
+                           Applies to this project's cover AND the
+                           photos inside it. Leave empty to use the
+                           site-wide cover setting (Look & effects);
+                           photos inside then stay in original colours.
          Cover image ..... shown in the list/grid. If empty, the first
                            photo of the project is used.
          Photos & videos . what shows when the project opens, top to
@@ -119,7 +124,9 @@ In the editor's left menu you'll find:
          between slides) / Hard cut / Soft fade.
        - Slideshow contrast: Crushed (harsh flash-photo look) / Normal.
          (Black & white for the slideshow is under Homepage.)
-       - Photo tone when hovering projects: Crushed B&W / B&W / Original.
+       - Project covers, site-wide: Original / B&W / Crushed B&W. Used
+         for covers in the work list preview, the grid and on phones,
+         for every project that doesn't set its own "Photo colours".
        - Film grain: Strong / Subtle / Off.
        - Scan lines + VHS tracking band: on/off.
        - Logo glitch every few seconds: on/off (a split-second tear of
@@ -290,6 +297,9 @@ I want to see the intro again
 8. CHANGE LOG (newest first). Add a line for every change.
 -------------------------------------------------------------------------
 
+2026-11-24  Photo colours: each project can be Original / B&W / Crushed
+            B&W (cover + photos inside). Site-wide cover default set to
+            Original colours. Grid/phone covers no longer forced to B&W.
 2026-11-24  Opium-inspired look, all switchable in Pages CMS ("Look &
             effects"): flash/hard-cut slideshow, crushed contrast, strong
             grain, scan lines + VHS band, logo glitch, glitchy hovers,

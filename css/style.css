@@ -205,7 +205,7 @@ section { padding: 0 var(--pad); }
   position: fixed; top: 0; left: 0; z-index: 40;
   width: clamp(200px, 22vw, 340px); height: auto;
   pointer-events: none; opacity: 0;
-  filter: grayscale(1) contrast(1.15);
+  filter: var(--tone, grayscale(0));
   transform: translate(-50%, -50%) scale(.92);
   transition: opacity .2s, transform .2s;
   box-shadow: 0 0 0 1px var(--line);
@@ -225,10 +225,10 @@ section { padding: 0 var(--pad); }
 }
 .work__list[data-view="grid"] .work__thumb {
   display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; margin-bottom: 8px;
-  filter: grayscale(1) brightness(.75);
+  filter: var(--tone, grayscale(0)) brightness(.75);
   transition: filter .35s;
 }
-.work__list[data-view="grid"] .work__item a:hover .work__thumb { filter: grayscale(0) brightness(1); }
+.work__list[data-view="grid"] .work__item a:hover .work__thumb { filter: var(--tone, grayscale(0)) brightness(1); }
 .work__list[data-view="grid"] .work__title { font-size: clamp(20px, 2.2vw, 30px); flex: 1 1 100%; order: 2; }
 .work__list[data-view="grid"] .work__num { order: 1; }
 .work__list[data-view="grid"] .work__type { order: 3; }
@@ -348,7 +348,7 @@ section { padding: 0 var(--pad); }
   .work__type, .work__arrow { display: none; }
   .work__list[data-view="list"] .work__thumb {
     display: block; grid-column: 1 / -1; width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
-    filter: grayscale(1) brightness(.8); margin-bottom: 4px; order: -1;
+    filter: var(--tone, grayscale(0)) brightness(.85); margin-bottom: 4px; order: -1;
   }
   .work__list[data-view="grid"] { grid-template-columns: 1fr 1fr; }
   .hover-preview { display: none; }
@@ -398,12 +398,8 @@ section { padding: 0 var(--pad); }
 }
 @keyframes row-flick { 0% { background: var(--night); color: var(--bone); } 50% { background: var(--white); color: var(--black); } 100% { background: var(--bone); } }
 
-/* photo tone: the hover preview in list view, and grid covers on hover */
-.tone-natural .hover-preview { filter: none; }
-.tone-bw .hover-preview { filter: grayscale(1) contrast(1.15); }
-.tone-crushed .hover-preview { filter: grayscale(1) contrast(1.8) brightness(.85); }
-.tone-bw .work__list[data-view="grid"] .work__item a:hover .work__thumb { filter: grayscale(1) contrast(1.15); }
-.tone-crushed .work__list[data-view="grid"] .work__item a:hover .work__thumb { filter: grayscale(1) contrast(1.8) brightness(.9); }
+/* photo colours: set per project / site-wide in Pages CMS; JS fills --tone */
+.project__media img { filter: var(--tone, grayscale(0)); }
 
 /* crosshair cursor (Bone with a Night outline) */
 .fx-cursor, .fx-cursor * {

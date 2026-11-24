@@ -64,6 +64,8 @@
     return null;
   }
 
+  /* colour treatments for project photos (brand-safe: greys only, no tints) */
+  const TONES = { natural: "grayscale(0)", bw: "grayscale(1) contrast(1.15)", crushed: "grayscale(1) contrast(1.8) brightness(.85)" };
   const slugify = t => String(t || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "project";
   const used = {};
@@ -79,9 +81,12 @@
       return null;
     }).filter(Boolean);
     const firstImage = media.find(m => m.type === "image");
+    const ownTone = ["natural", "bw", "crushed"].includes(p.colours) ? p.colours : "";
     return {
       slug, title: p.title, type: String(p.type || "PHOTO").toUpperCase(), year: p.year || "", line: p.line || "",
-      cover: path(p.cover) || (firstImage ? firstImage.src : ""), media
+      cover: path(p.cover) || (firstImage ? firstImage.src : ""), media,
+      coverTone: TONES[ownTone || look.photo_tone] || TONES.natural,   // cover in list / grid / hover
+      photoTone: TONES[ownTone || "natural"]                            // photos inside the project
     };
   });
 
@@ -225,7 +230,7 @@
   /* ---------- build work list ---------- */
   const list = $("#work-list");
   list.innerHTML = projects.map((p, i) => `
-    <li class="work__item" data-type="${esc(p.type)}">
+    <li class="work__item" data-type="${esc(p.type)}" style="--tone:${p.coverTone}">
       <a href="#work/${p.slug}" data-index="${i}">
         <img class="work__thumb" src="${esc(p.cover)}" alt="" loading="lazy">
         <span class="work__num">${pad(i + 1)}</span>
@@ -266,6 +271,7 @@
       a.addEventListener("mouseenter", () => {
         if (list.dataset.view !== "list") return;
         preview.src = projects[a.dataset.index].cover;
+        preview.style.setProperty("--tone", projects[a.dataset.index].coverTone);
         preview.classList.add("is-on");
       });
       a.addEventListener("mouseleave", () => preview.classList.remove("is-on"));
@@ -305,6 +311,7 @@
     $("#project-meta").innerHTML = `<span>${esc(p.type)}</span><span>${esc(p.year)}</span>${p.line ? `<span>${esc(p.line)}</span>` : ""}`;
     const media = $("#project-media");
     media.innerHTML = p.media.map(mediaHTML).join("");
+    media.style.setProperty("--tone", p.photoTone);
     // tall photos sit side by side in pairs; a tall photo without a partner is centred
     const imgs = $$("img", media);
     Promise.all(imgs.map(img => img.complete && img.naturalWidth ? Promise.resolve()

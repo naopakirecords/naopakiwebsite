@@ -61,6 +61,15 @@ content:
         label: One short line
         type: string
         description: Optional. Keep it short.
+      - name: colours
+        label: Photo colours
+        type: select
+        description: "Leave empty to use the site-wide setting (Look & effects). Original / B&W / Crushed B&W apply to this project's cover AND the photos inside it."
+        options:
+          values:
+            - { name: natural, label: Original colours }
+            - { name: bw, label: Black & white }
+            - { name: crushed, label: Crushed black & white }
       - name: cover
         label: Cover image
         type: image
@@ -250,9 +259,9 @@ content:
             - { name: crushed, label: Crushed (harsh flash look) }
             - { name: normal, label: Normal }
       - name: photo_tone
-        label: Photo tone when hovering projects
+        label: Project covers, site-wide (work list preview, grid, phones)
         type: select
-        description: The floating preview in the list, and covers in the grid on hover.
+        description: Default for every project. Each project can override it with its own "Photo colours". Photos inside a project stay in original colours unless that project says otherwise.
         options:
           values:
             - { name: crushed, label: Crushed black & white }
