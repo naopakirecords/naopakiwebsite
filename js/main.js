@@ -1,11 +1,93 @@
 /* NAOPAKI — site behaviour. No libraries, no build step. */
-(function () {
+/* All content is loaded from content/projects.json and content/site.json,
+   which are edited with Pages CMS (see README). */
+(async function () {
   "use strict";
 
-  const projects = window.NAOPAKI_PROJECTS || [];
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
   const pad = (n, l = 2) => String(n).padStart(l, "0");
+  const esc = v => String(v == null ? "" : v).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const path = v => String(v || "").trim().replace(/^\/+/, "");   // CMS may write "/assets/…"; the site lives in a sub-folder
+  const lines = v => esc(v).replace(/\n/g, "<br>");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- load content ---------- */
+  async function getJSON(url) {
+    try {
+      const r = await fetch(url, { cache: "no-cache" });
+      return r.ok ? await r.json() : null;
+    } catch (e) { return null; }   // e.g. index.html opened straight from disk
+  }
+  const [rawProjects, site] = await Promise.all([getJSON("content/projects.json"), getJSON("content/site.json")]);
+
+  /* a YouTube or Vimeo link (or bare ID) → { type, id } */
+  function parseVideoLink(link) {
+    const s = String(link || "").trim();
+    if (!s) return null;
+    let m = s.match(/vimeo\.com\/(?:.*\/)?(\d+)/) || s.match(/^(\d{6,})$/);
+    if (m) return { type: "vimeo", id: m[1] };
+    m = s.match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/) || s.match(/^([\w-]{11})$/);
+    if (m) return { type: "youtube", id: m[1] };
+    return null;
+  }
+
+  const slugify = t => String(t || "").toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "project";
+  const used = {};
+  const projects = (Array.isArray(rawProjects) ? rawProjects : []).filter(p => p && p.title).map(p => {
+    let slug = slugify(p.title);
+    if (used[slug]) slug += "-" + (++used[slug]); else used[slug] = 1;
+    const media = (p.media || []).map(m => {
+      if (!m) return null;
+      if (m.image) return { type: "image", src: path(m.image), alt: p.title };
+      const v = parseVideoLink(m.video_link);
+      if (v) return v;
+      if (m.video_file) return { type: "video", src: path(m.video_file) };
+      return null;
+    }).filter(Boolean);
+    const firstImage = media.find(m => m.type === "image");
+    return {
+      slug, title: p.title, type: String(p.type || "PHOTO").toUpperCase(), year: p.year || "", line: p.line || "",
+      cover: path(p.cover) || (firstImage ? firstImage.src : ""), media
+    };
+  });
+
+  /* ---------- site texts (About, contact) ---------- */
+  if (site) {
+    const a = site.about || {};
+    if (a.statement) $("#about-statement").innerHTML = esc(a.statement).replace(/\*(.+?)\*/g, "<em>$1</em>").replace(/\n/g, "<br>");
+    if (a.we_make) $("#about-we-make").innerHTML = lines(a.we_make);
+    if (a.status) $("#about-status").innerHTML = lines(a.status);
+    if (a.approach) $("#about-approach").innerHTML = lines(a.approach);
+    const c = site.contact || {};
+    if (c.email) { const mail = $("#contact-mail"); mail.href = "mailto:" + c.email.trim(); mail.textContent = c.email.trim().toUpperCase(); }
+    const socials = [["Instagram", c.instagram], ["TikTok", c.tiktok], ["YouTube", c.youtube]].filter(([, v]) => v && v.link);
+    if (c.instagram || c.tiktok || c.youtube) {
+      $("#contact-social").innerHTML = socials.map(([name, v]) =>
+        `<li><a href="${esc(v.link)}" target="_blank" rel="noopener">${name} <span>${esc(v.handle || "")}</span></a></li>`).join("");
+    }
+  }
+
+  /* ---------- hero slideshow ---------- */
+  (function slideshow() {
+    const box = $("#hero-slides");
+    const cfg = (site && site.slideshow) || {};
+    const imgs = (cfg.images || []).map(path).filter(Boolean);
+    box.classList.toggle("is-bw", cfg.black_and_white !== false);
+    if (!imgs.length) return;
+    box.innerHTML = imgs.map((src, i) => `<div class="hero__slide${i === 0 ? " is-on" : ""}" style="background-image:url('${esc(src)}')"></div>`).join("");
+    if (imgs.length < 2 || reduceMotion) return;
+    const slides = $$(".hero__slide", box);
+    const ms = Math.max(2, Number(cfg.seconds) || 5) * 1000;
+    let i = 0;
+    setInterval(() => {
+      if (document.hidden) return;
+      slides[i].classList.remove("is-on");
+      i = (i + 1) % slides.length;
+      slides[i].classList.add("is-on");
+    }, ms);
+  })();
 
   /* ---------- counts & year ---------- */
   $("#count-hero").textContent = pad(projects.length, 3);
@@ -38,13 +120,13 @@
   /* ---------- build work list ---------- */
   const list = $("#work-list");
   list.innerHTML = projects.map((p, i) => `
-    <li class="work__item" data-type="${p.type}">
+    <li class="work__item" data-type="${esc(p.type)}">
       <a href="#work/${p.slug}" data-index="${i}">
-        <img class="work__thumb" src="${p.cover}" alt="" loading="lazy">
+        <img class="work__thumb" src="${esc(p.cover)}" alt="" loading="lazy">
         <span class="work__num">${pad(i + 1)}</span>
-        <span class="work__title">${p.title}</span>
-        <span class="work__type">${p.type}</span>
-        <span class="work__year">${p.year}</span>
+        <span class="work__title">${esc(p.title)}</span>
+        <span class="work__type">${esc(p.type)}</span>
+        <span class="work__year">${esc(p.year)}</span>
         <span class="work__arrow">→</span>
       </a>
     </li>`).join("");
@@ -93,7 +175,7 @@
 
   function mediaHTML(m) {
     if (m.type === "image") {
-      return `<figure style="margin:0"><img src="${m.src}" alt="${m.alt || ""}" loading="lazy"></figure>`;
+      return `<figure style="margin:0"><img src="${esc(m.src)}" alt="${esc(m.alt)}" loading="lazy"></figure>`;
     }
     if (m.type === "youtube") {
       return `<div class="embed"><iframe src="https://www.youtube-nocookie.com/embed/${m.id}?rel=0&modestbranding=1&color=white"
@@ -104,7 +186,7 @@
         title="Video" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`;
     }
     if (m.type === "video") {
-      return `<div class="embed"><video src="${m.src}" ${m.poster ? `poster="${m.poster}"` : ""} controls playsinline preload="metadata"></video></div>`;
+      return `<div class="embed"><video src="${esc(m.src)}" controls playsinline preload="metadata"></video></div>`;
     }
     return "";
   }
@@ -115,7 +197,7 @@
     document.title = p.title.toUpperCase() + " — NAOPAKI";
     $("#project-index").textContent = pad(i + 1) + " / " + pad(projects.length);
     $("#project-title").textContent = p.title;
-    $("#project-meta").innerHTML = `<span>${p.type}</span><span>${p.year}</span>${p.line ? `<span>${p.line}</span>` : ""}`;
+    $("#project-meta").innerHTML = `<span>${esc(p.type)}</span><span>${esc(p.year)}</span>${p.line ? `<span>${esc(p.line)}</span>` : ""}`;
     const media = $("#project-media");
     media.innerHTML = p.media.map(mediaHTML).join("");
     // tall photos sit side by side in pairs; a tall photo without a partner is centred

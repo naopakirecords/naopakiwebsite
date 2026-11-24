@@ -5,54 +5,42 @@ A one-page portfolio site with a project view that opens when you click a projec
 ```
 index.html            the page
 css/style.css         all styling (brand colours are at the top)
-js/projects.js        ← YOUR CONTENT: the list of projects
+content/projects.json ← projects (edited with Pages CMS)
+content/site.json     ← homepage slideshow, About text, email, socials (edited with Pages CMS)
+.pages.yml            the editor's setup (Pages CMS)
 js/main.js            behaviour (list/grid, filter, project view)
 assets/brand/         logo, seal, favicon, Pirata One font + licence
 assets/img/work/      project photos (currently placeholders)
+assets/img/hero/      homepage slideshow images (currently placeholders)
 assets/video/         small video files (currently a placeholder loop)
 ```
 
 ## Preview it on your computer
-Double-click `index.html` and it opens in your browser. Everything works offline except YouTube and Vimeo embeds.
+The content is loaded from `content/*.json`, which browsers block when `index.html` is opened straight from disk. Run a tiny local server instead: in this folder run `python -m http.server`, then open http://localhost:8000. The live site is not affected.
 
 ## Where it lives
 - **Repository:** https://github.com/naopakirecords/naopakiwebsite (company account, branch `main`)
 - **Live site:** https://naopakirecords.github.io/naopakiwebsite/
 - Hosted free on GitHub Pages: **Settings → Pages → Deploy from a branch → `main` / `(root)` → Save**. The repo must stay **public** for free Pages.
 
-To update the site later, upload the changed files again in the repo (**Add file → Upload files**). The site refreshes within a minute or two.
+## Editing content (no code): Pages CMS
+1. Go to **https://app.pagescms.org** and sign in with the **naopakirecords** GitHub account (or with the email invite you were sent).
+2. Open **naopakirecords / naopakiwebsite** (branch `main`).
+3. Edit and click **Save**. The live site updates within 1–2 minutes.
 
-## Swapping placeholders for real work
-Everything is in **`js/projects.js`**. Each project looks like this:
+What you can edit:
+- **Projects**: add, remove and drag to reorder. Each has a title, type (PHOTO/VIDEO, used by the filter), year, one short line, a cover image and a list of photos/videos. For each item fill in ONE box: a photo, a YouTube/Vimeo link, or a small mp4.
+- **Homepage, About & Contact**: the slideshow behind the logo (images, seconds per image, black & white on/off), the About statement and its three columns, the email and social links (leave a link empty to hide that row).
 
-```js
-{
-  slug: "sleepwalk", title: "Sleepwalk", type: "PHOTO", year: "2026",
-  line: "One short line.",
-  cover: "assets/img/work/sleepwalk-cover.jpg",
-  media: [
-    { type: "image",   src: "assets/img/work/sleepwalk-1.jpg", alt: "Sleepwalk" },
-    { type: "youtube", id: "VIDEO_ID" },
-    { type: "vimeo",   id: "123456789" }
-  ]
-},
-```
-
-- **Photos:** export JPGs at about **2000 px on the long side**, quality 75–80, ideally under 500 KB each. Put them in `assets/img/work/`.
-- **Videos:** upload them to YouTube (unlisted is fine) or Vimeo and paste the ID.
-  - YouTube ID: in `youtube.com/watch?v=AbC123xyz` it's `AbC123xyz`.
-  - Vimeo ID: in `vimeo.com/123456789` it's `123456789`.
-  - Don't upload big video files to GitHub. It rejects anything over 100 MB, and video makes the repo slow.
+Media tips:
+- **Photos:** JPG, about **2000 px on the long side**, quality 75–80, under ~500 KB. Slideshow images: landscape works best.
+- **Videos:** upload to YouTube (unlisted is fine) or Vimeo and paste the link. Only use the mp4 upload for short clips. GitHub rejects files over 100 MB, and video makes the repo slow.
 - **Layout is automatic.** Tall photos pair up side by side. A tall photo without a partner is centred. Wide photos and videos run full width.
-- **Order:** the list order on the site matches the order in the file.
-- **Type:** use `"PHOTO"` or `"VIDEO"` so the filter works.
-- **Delete placeholders:** remove the files starting with `p0` from `assets/img/work/`. Delete `assets/video/placeholder-*` too, but only after replacing the hero background video in `index.html` (search for `placeholder-loop`).
+- Placeholder files start with `p0` (`assets/img/work`), `slide-0` (`assets/img/hero`) and `placeholder-` (`assets/video`). Delete them in the editor's Media section once they're no longer used.
 
-## Other placeholders to change in `index.html`
-- Email: search `hello@naopaki.com`
-- Socials: search `instagram.com/`, `tiktok.com/` and `youtube.com/`, then put in the full profile links and @handles
-- About text: the `about__statement` paragraph and the three columns under it
-- Hero background video: `assets/video/placeholder-loop.mp4`. Use a short, muted, compressed loop (under about 5 MB) or delete the `<video class="hero__bg" …>` line.
+Inviting someone: in Pages CMS open the repo's **Settings → Collaborators** and invite them by email. They don't need a GitHub account. Saves are committed to the repo by the Pages CMS app on the company repo, and the commit message names who made the change.
+
+If you change `css/` or `js/` files by hand, bump the `?v=` number on their links in `index.html` so browsers load the new version.
 
 ## Brand
 Colours (Night `#0A0B0D`, Bone `#EEEDE7`), the Swept Turn logo and seal, and Pirata One all come from the NAOPAKI brand guide v1.0. The logo is always used as the supplied SVG, never retyped. Pirata One is under the SIL Open Font License (see `assets/brand/OFL.txt`).

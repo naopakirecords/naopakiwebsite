@@ -1,0 +1,34 @@
+{
+  "slideshow": {
+    "images": [
+      "assets/img/hero/slide-01.jpg",
+      "assets/img/hero/slide-02.jpg",
+      "assets/img/hero/slide-03.jpg",
+      "assets/img/hero/slide-04.jpg",
+      "assets/img/hero/slide-05.jpg"
+    ],
+    "seconds": 5,
+    "black_and_white": true
+  },
+  "about": {
+    "statement": "Naopaki means *inside out*. Backwards. The wrong way round. We are a two-person crew making photographs and moving images that keep the seams showing — raw light, real places, no polish for the sake of polish.",
+    "we_make": "Photoshoots\nMusic videos\nVisualisers\nPress & cover art",
+    "status": "Independent.\nLabel in progress.",
+    "approach": "Small crew. Fast hands.\nEvery frame turned twice."
+  },
+  "contact": {
+    "email": "hello@naopaki.com",
+    "instagram": {
+      "handle": "@naopaki",
+      "link": "https://instagram.com/"
+    },
+    "tiktok": {
+      "handle": "@naopaki",
+      "link": "https://tiktok.com/"
+    },
+    "youtube": {
+      "handle": "@naopaki",
+      "link": "https://youtube.com/"
+    }
+  }
+}

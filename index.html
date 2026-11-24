@@ -11,7 +11,7 @@
   <meta property="og:image" content="assets/brand/og-image.jpg">
   <link rel="icon" type="image/png" href="assets/brand/favicon.png">
   <link rel="preload" href="assets/brand/PirataOne-Regular.ttf" as="font" type="font/ttf" crossorigin>
-  <link rel="stylesheet" href="css/style.css?v=3">
+  <link rel="stylesheet" href="css/style.css?v=4">
 </head>
 <body>
   <div class="grain" aria-hidden="true"></div>
@@ -32,8 +32,7 @@
   <main id="top">
     <!-- ============ HERO ============ -->
     <section class="hero">
-      <video class="hero__bg" src="assets/video/placeholder-loop.mp4" poster="assets/video/placeholder-poster.jpg"
-             autoplay muted loop playsinline aria-hidden="true"></video>
+      <div class="hero__slides is-bw" id="hero-slides" aria-hidden="true"></div>
       <h1 class="hero__logo">
         <img src="assets/brand/logo-full.svg" alt="NAOPAKI" width="858" height="263">
       </h1>
@@ -71,7 +70,7 @@
     <!-- ============ ABOUT ============ -->
     <section class="about" id="about">
       <div class="sec-head"><h2 class="sec-head__title">ABOUT</h2></div>
-      <p class="about__statement">
+      <p class="about__statement" id="about-statement">
         Naopaki means <em>inside out</em>. Backwards. The wrong way round.
         We are a two-person crew making photographs and moving images that keep the
         seams showing — raw light, real places, no polish for the sake of polish.
@@ -79,15 +78,15 @@
       <div class="about__cols mono">
         <dl>
           <dt>We make</dt>
-          <dd>Photoshoots<br>Music videos<br>Visualisers<br>Press &amp; cover art</dd>
+          <dd id="about-we-make">Photoshoots<br>Music videos<br>Visualisers<br>Press &amp; cover art</dd>
         </dl>
         <dl>
           <dt>Status</dt>
-          <dd>Independent.<br>Label in progress.</dd>
+          <dd id="about-status">Independent.<br>Label in progress.</dd>
         </dl>
         <dl>
           <dt>Approach</dt>
-          <dd>Small crew. Fast hands.<br>Every frame turned twice.</dd>
+          <dd id="about-approach">Small crew. Fast hands.<br>Every frame turned twice.</dd>
         </dl>
       </div>
     </section>
@@ -95,8 +94,8 @@
     <!-- ============ CONTACT ============ -->
     <section class="contact" id="contact">
       <div class="sec-head"><h2 class="sec-head__title">CONTACT</h2></div>
-      <a class="contact__mail" href="mailto:hello@naopaki.com">HELLO@NAOPAKI.COM</a>
-      <ul class="contact__social mono">
+      <a class="contact__mail" id="contact-mail" href="mailto:hello@naopaki.com">HELLO@NAOPAKI.COM</a>
+      <ul class="contact__social mono" id="contact-social">
         <li><a href="https://instagram.com/" target="_blank" rel="noopener">Instagram <span>@naopaki</span></a></li>
         <li><a href="https://tiktok.com/" target="_blank" rel="noopener">TikTok <span>@naopaki</span></a></li>
         <li><a href="https://youtube.com/" target="_blank" rel="noopener">YouTube <span>@naopaki</span></a></li>
@@ -137,7 +136,7 @@
     </div>
   </div>
 
-  <script src="js/projects.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
+  <!-- Content (projects, slideshow, About, contact) lives in content/*.json and is edited with Pages CMS -->
+  <script src="js/main.js?v=4"></script>
 </body>
 </html>

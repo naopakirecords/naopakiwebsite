@@ -1,0 +1,154 @@
+# Pages CMS configuration: https://pagescms.org/docs/configuration/
+# This file defines the editor at app.pagescms.org. You don't need to touch it to edit content.
+
+settings:
+  commit:
+    identity: app
+    templates:
+      create: "Add {path} (via Pages CMS, {userName})"
+      update: "Update {path} (via Pages CMS, {userName})"
+      delete: "Delete {path} (via Pages CMS, {userName})"
+      rename: "Rename {oldPath} to {newPath} (via Pages CMS, {userName})"
+
+media:
+  - name: work
+    label: Project photos
+    input: assets/img/work
+    output: /assets/img/work
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+  - name: slideshow
+    label: Homepage slideshow
+    input: assets/img/hero
+    output: /assets/img/hero
+    rename: safe
+    extensions: [jpg, jpeg, png, webp]
+  - name: videos
+    label: Video files (small clips only)
+    input: assets/video
+    output: /assets/video
+    rename: safe
+    extensions: [mp4, webm]
+
+content:
+  - name: projects
+    label: Projects
+    type: file
+    path: content/projects.json
+    format: json
+    list: true
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: type
+        label: Type
+        type: select
+        description: Used by the All / Photo / Video filter.
+        options:
+          values: [PHOTO, VIDEO]
+      - name: year
+        label: Year
+        type: string
+      - name: line
+        label: One short line
+        type: string
+        description: Optional. Keep it short.
+      - name: cover
+        label: Cover image
+        type: image
+        description: Shown in the work list and grid. If empty, the first photo below is used.
+        options:
+          media: work
+      - name: media
+        label: Photos & videos (shown top to bottom when the project opens)
+        description: Fill in ONE box per item. Tall photos pair up side by side automatically.
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{image}{video_link}{video_file}"
+        fields:
+          - name: image
+            label: Photo
+            type: image
+            options:
+              media: work
+          - name: video_link
+            label: OR YouTube / Vimeo link
+            type: string
+            description: Paste the full link, e.g. https://youtu.be/... or https://vimeo.com/...
+          - name: video_file
+            label: OR small video file (mp4, under ~20 MB)
+            type: file
+            description: Prefer YouTube/Vimeo for anything longer than a short clip.
+            options:
+              media: videos
+
+  - name: site
+    label: Homepage, About & Contact
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: slideshow
+        label: Homepage slideshow (behind the logo)
+        type: object
+        fields:
+          - name: images
+            label: Slideshow images
+            type: image
+            description: Shown in this order, then loops. Landscape JPGs about 2000 px wide, under ~500 KB.
+            options:
+              media: slideshow
+              multiple:
+                max: 20
+          - name: seconds
+            label: Seconds per image
+            type: number
+          - name: black_and_white
+            label: Show in black & white
+            type: boolean
+      - name: about
+        label: About
+        type: object
+        fields:
+          - name: statement
+            label: Statement
+            type: text
+            description: Wrap a word in *stars* to make it italic.
+          - name: we_make
+            label: "Column: We make"
+            type: text
+          - name: status
+            label: "Column: Status"
+            type: text
+          - name: approach
+            label: "Column: Approach"
+            type: text
+      - name: contact
+        label: Contact
+        type: object
+        fields:
+          - name: email
+            label: Email
+            type: string
+          - name: instagram
+            label: Instagram
+            type: object
+            fields:
+              - { name: handle, label: Handle, type: string }
+              - { name: link, label: Link (leave empty to hide), type: string }
+          - name: tiktok
+            label: TikTok
+            type: object
+            fields:
+              - { name: handle, label: Handle, type: string }
+              - { name: link, label: Link (leave empty to hide), type: string }
+          - name: youtube
+            label: YouTube
+            type: object
+            fields:
+              - { name: handle, label: Handle, type: string }
+              - { name: link, label: Link (leave empty to hide), type: string }
