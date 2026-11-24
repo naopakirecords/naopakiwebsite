@@ -1,0 +1,255 @@
+NAOPAKI WEBSITE: HOW-TO
+=======================
+
+Read this first if you've just been given access to the NAOPAKI website.
+It explains how the site works, and how and where to change things.
+
+RULE: Whenever something about the site changes (a new section, a new
+setting, a new way of doing things), update this file in the same go.
+The CHANGE LOG at the bottom lists what changed and when.
+
+
+-------------------------------------------------------------------------
+1. THE BASICS
+-------------------------------------------------------------------------
+
+Live website ....... https://naopakirecords.github.io/naopakiwebsite/
+Code + content ..... https://github.com/naopakirecords/naopakiwebsite  (branch: main)
+Editor (no code) ... https://app.pagescms.org
+Owner account ...... GitHub "naopakirecords" (the company account)
+
+- The site is one page (Work, About, Contact) plus a project view that
+  opens when you click a project.
+- It is hosted for free on GitHub Pages. Every change saved to the repo
+  goes live by itself within 1-2 minutes.
+- All changes must be made from the company account (naopakirecords),
+  never from personal GitHub accounts.
+- Videos are NOT stored on the site. They live on YouTube or Vimeo and
+  the site just shows them.
+
+
+-------------------------------------------------------------------------
+2. EDITING CONTENT (NO CODE): PAGES CMS
+-------------------------------------------------------------------------
+
+This is how almost everything is changed: photos, videos, projects,
+slideshow, texts, links, the top bar.
+
+Getting in
+  1. Go to https://app.pagescms.org
+  2. Sign in:
+     - with GitHub, using the naopakirecords account, OR
+     - with "Continue with email" if you were invited by email
+       (you don't need a GitHub account for that).
+  3. Open  naopakirecords / naopakiwebsite  (branch main).
+
+Saving
+  - Nothing changes until you click SAVE (top of the page).
+  - After saving, wait 1-2 minutes, then reload the website.
+    If you still see the old version, do a hard refresh
+    (Ctrl+F5 on Windows, Cmd+Shift+R on Mac).
+  - Always reload the editor page before you start editing, in case
+    someone else changed something in the meantime.
+
+In the editor's left menu you'll find:
+
+  A) PROJECTS
+     The list of work shown in the "Work" section, in this order.
+     - Add a project with the add button; drag items to reorder them.
+     - For each project:
+         Title ........... shown in capitals
+         Type ............ PHOTO or VIDEO (used by the All/Photo/Video filter)
+         Year ............ e.g. 2026
+         One short line .. optional, keep it short
+         Cover image ..... shown in the list/grid. If empty, the first
+                           photo of the project is used.
+         Photos & videos . what shows when the project opens, top to
+                           bottom. Each item: fill in ONE box only:
+                             - Photo (upload or select), OR
+                             - YouTube / Vimeo link (paste the full link), OR
+                             - Small video file (mp4, short clips only)
+     - Layout is automatic: tall (portrait) photos sit side by side in
+       pairs, a tall photo without a partner is centred, wide photos and
+       videos run full width.
+     - Each project gets its own shareable link, made from its title:
+       .../naopakiwebsite/#work/<title-in-lowercase-with-dashes>
+       (so changing a title changes its link).
+
+  B) HOMEPAGE, ABOUT & CONTACT
+     Homepage slideshow (the images behind the big logo)
+       - Slideshow images: Upload or Select. They play left to right,
+         then loop. DRAG the thumbnails to change the order (dragging
+         appears once there are 2 or more images).
+       - Seconds per image: how long each image stays (default 5).
+       - Show in black & white: on = grayscale, off = original colours.
+     Top bar (the logo + menu bar at the top)
+       - Darkness: 0 = fully see-through, 100 = solid black (default 45).
+       - Blur what's behind it: on/off.
+     About
+       - Statement: the big paragraph. Put a word between *stars* to
+         make it italic, e.g. *inside out*.
+       - Three columns: We make / Status / Approach. Each new line in
+         the box becomes a new line on the site.
+     Contact
+       - Email: shown big and clickable.
+       - Instagram / TikTok / YouTube: handle (e.g. @naopaki) + full
+         profile link. Leave the link EMPTY to hide that row.
+
+  C) MEDIA
+     All uploaded files, by folder:
+       Project photos ........ assets/img/work
+       Homepage slideshow .... assets/img/hero
+       Video files ........... assets/video
+     Use it to delete files that are no longer used.
+
+
+-------------------------------------------------------------------------
+3. PHOTO AND VIDEO RULES
+-------------------------------------------------------------------------
+
+Photos
+  - JPG, about 2000 px on the long side, quality 75-80,
+    ideally under ~500 KB each (big files make the site slow on phones).
+  - Slideshow images: landscape works best (they fill the screen).
+  - UPLOAD ONE IMAGE AT A TIME in the editor and wait for its thumbnail
+    before uploading the next. Uploading several at once causes an
+    error ("is at ... but expected ...") and only some get saved.
+  - Many images at once? Upload them on GitHub instead (see section 5),
+    then add them in the editor with "Select".
+
+Videos
+  - Upload to YouTube (unlisted is fine) or Vimeo, then paste the link
+    into the project. Links like these all work:
+      https://www.youtube.com/watch?v=XXXXXXXXXXX
+      https://youtu.be/XXXXXXXXXXX
+      https://vimeo.com/123456789
+  - Only use the mp4 upload for very short clips (under ~20 MB).
+    GitHub rejects files over 100 MB and big videos slow the repo down.
+
+Placeholders (to delete once real content is in)
+  - assets/img/work/p01-1.jpg ... p08-4.jpg   (placeholder project photos)
+  - assets/img/hero/slide-01.jpg ... slide-05.jpg (placeholder slides)
+  - assets/video/placeholder-loop.mp4         (placeholder video)
+  Only delete a file once no project or slideshow still uses it.
+
+
+-------------------------------------------------------------------------
+4. GIVING SOMEONE ACCESS
+-------------------------------------------------------------------------
+
+To edit content only (recommended for most people)
+  - In Pages CMS, open the repo's Collaborators page (left menu) and
+    invite them by email. They sign in with "Continue with email".
+  - Their saves are committed to the repo by the Pages CMS app on the
+    company repo, with a message like "Update content/site.json
+    (via Pages CMS)".
+
+To work on the code
+  - Sign in to the naopakirecords GitHub account, or add their GitHub
+    account as a collaborator on the repo (Settings -> Collaborators).
+    Code changes should still be committed as naopakirecords.
+
+
+-------------------------------------------------------------------------
+5. EDITING ON GITHUB DIRECTLY (BACKUP WAY)
+-------------------------------------------------------------------------
+
+Sign in to github.com as naopakirecords and open the repo.
+
+  - Upload many files at once: open the folder (e.g. assets/img/hero)
+    -> Add file -> Upload files -> drag them in -> Commit changes.
+    A file with the same name replaces the old one.
+  - Edit a text/data file: open it -> pencil icon -> edit -> Commit.
+  - Undo a mistake: open the file -> History -> pick the last good
+    version. (Or ask whoever manages the code.)
+
+Careful: content/*.json files are data. A missing comma, quote or
+bracket breaks that part of the site. Prefer the editor (Pages CMS),
+which can't make that mistake.
+
+
+-------------------------------------------------------------------------
+6. HOW IT'S BUILT (FOR WHOEVER TOUCHES THE CODE)
+-------------------------------------------------------------------------
+
+Plain HTML/CSS/JavaScript. No build step, no libraries, nothing to
+install.
+
+  index.html ............ the page structure (sections, menu, footer)
+  css/style.css ......... all styling. Brand colours are at the top:
+                          Night #0A0B0D (background), Bone #EEEDE7 (text)
+  js/main.js ............ loads the content files and runs everything:
+                          slideshow, work list/grid + filter, hover
+                          preview, project view, marquee, top bar settings
+  content/projects.json . the projects            (edited in Pages CMS)
+  content/site.json ..... slideshow, top bar, About, contact
+                                                  (edited in Pages CMS)
+  .pages.yml ............ defines what the editor shows. Add a field here
+                          AND handle it in js/main.js to make something
+                          new editable.
+  assets/brand/ ......... logo, seal, favicon, Pirata One font + licence
+  assets/img/work/ ...... project photos
+  assets/img/hero/ ...... slideshow images
+  assets/video/ ......... small video files
+  README.md ............. short technical readme
+  HOW-TO.txt ............ this file
+  .nojekyll ............. tells GitHub Pages to serve files as they are
+
+Important rules
+  - Brand: the logo is always the supplied SVG, never retyped in the
+    font. Pirata One is only for project titles and accents.
+  - After changing css/style.css or js/main.js, bump the ?v= number on
+    their links at the top/bottom of index.html (e.g. ?v=5 -> ?v=6),
+    otherwise visitors' browsers keep the old version.
+  - Preview on your computer: opening index.html by double-click does
+    NOT load the content (browsers block it). In the site folder run
+        python -m http.server
+    and open http://localhost:8000
+  - Hosting: GitHub repo Settings -> Pages -> Deploy from a branch ->
+    main / (root). The repo must stay PUBLIC for free GitHub Pages.
+
+Web address
+  - Now: https://naopakirecords.github.io/naopakiwebsite/
+  - Renaming the repo to "naopakirecords.github.io" would shorten it to
+    https://naopakirecords.github.io
+  - A clean address like naopaki.com needs a bought domain (~EUR 10-15
+    a year); it can be connected in Settings -> Pages -> Custom domain.
+
+
+-------------------------------------------------------------------------
+7. TROUBLESHOOTING
+-------------------------------------------------------------------------
+
+"is at ... but expected ..." in the editor
+  -> Several uploads at once clashed. Reload the editor, upload one at a
+     time. Files that did upload can be added with "Select".
+
+My change isn't on the site
+  -> Did you click Save? Wait 2 minutes, then hard refresh
+     (Ctrl+F5 / Cmd+Shift+R).
+
+The Work list is empty or a section looks broken
+  -> A content file was probably edited by hand and has a typo. On
+     GitHub open content/ -> the file -> History, and restore the last
+     good version.
+
+New setting doesn't appear in the editor
+  -> Reload the editor page.
+
+
+-------------------------------------------------------------------------
+8. CHANGE LOG (newest first). Add a line for every change.
+-------------------------------------------------------------------------
+
+2026-11-24  Added this HOW-TO.txt.
+2026-11-24  Top bar made more see-through (45% darkness + blur); darkness
+            and blur editable in Pages CMS (Homepage -> Top bar).
+2026-11-24  Pages CMS editor set up: projects, slideshow, About and
+            contact moved into content/*.json and editable without code.
+            Hero background video replaced by an image slideshow
+            (assets/img/hero), order/speed/black-and-white editable.
+2026-11-24  Site moved from a personal GitHub account to the company
+            account (naopakirecords/naopakiwebsite); GitHub Pages enabled.
+2026-11     Marquee fixes (endless loop at any width; text built into the
+            page so it never shows empty).
+2026-11     First version of the site (placeholder content).
