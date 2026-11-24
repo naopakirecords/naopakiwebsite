@@ -4,27 +4,19 @@
     "type": "PHOTO",
     "year": "2026",
     "line": "Placeholder — editorial shot after dark.",
-    "cover": "assets/img/work/p01-1.jpg",
+    "cover": "/assets/img/work/dsc08821.jpg",
     "media": [
       {
-        "image": "assets/img/work/p01-1.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p01-1.jpg"
       },
       {
-        "image": "assets/img/work/p01-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p01-2.jpg"
       },
       {
-        "image": "assets/img/work/p01-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p01-3.jpg"
       },
       {
-        "image": "assets/img/work/p01-4.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p01-4.jpg"
       }
     ]
   },
@@ -33,22 +25,16 @@
     "type": "VIDEO",
     "year": "2026",
     "line": "Placeholder — music video.",
-    "cover": "assets/img/work/p02-1.jpg",
+    "cover": "/assets/img/work/dsc08784.jpg",
     "media": [
       {
-        "image": "",
-        "video_link": "",
-        "video_file": "assets/video/placeholder-loop.mp4"
+        "video_file": "/assets/video/placeholder-loop.mp4"
       },
       {
-        "image": "assets/img/work/p02-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p02-2.jpg"
       },
       {
-        "image": "assets/img/work/p02-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p02-3.jpg"
       }
     ]
   },
@@ -57,27 +43,19 @@
     "type": "PHOTO",
     "year": "2025",
     "line": "Placeholder — portrait series.",
-    "cover": "assets/img/work/p03-1.jpg",
+    "cover": "/assets/img/work/dsc08770.jpg",
     "media": [
       {
-        "image": "assets/img/work/p03-1.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p03-1.jpg"
       },
       {
-        "image": "assets/img/work/p03-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p03-2.jpg"
       },
       {
-        "image": "assets/img/work/p03-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p03-3.jpg"
       },
       {
-        "image": "assets/img/work/p03-4.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p03-4.jpg"
       }
     ]
   },
@@ -86,22 +64,16 @@
     "type": "VIDEO",
     "year": "2025",
     "line": "Placeholder — short film.",
-    "cover": "assets/img/work/p04-1.jpg",
+    "cover": "/assets/img/work/dsc08848.jpg",
     "media": [
       {
-        "image": "",
-        "video_link": "",
-        "video_file": "assets/video/placeholder-loop.mp4"
+        "video_file": "/assets/video/placeholder-loop.mp4"
       },
       {
-        "image": "assets/img/work/p04-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p04-2.jpg"
       },
       {
-        "image": "assets/img/work/p04-4.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p04-4.jpg"
       }
     ]
   },
@@ -110,27 +82,19 @@
     "type": "PHOTO",
     "year": "2025",
     "line": "Placeholder — artist press shots.",
-    "cover": "assets/img/work/p05-1.jpg",
+    "cover": "/assets/img/work/dsc08852.jpg",
     "media": [
       {
-        "image": "assets/img/work/p05-1.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p05-1.jpg"
       },
       {
-        "image": "assets/img/work/p05-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p05-2.jpg"
       },
       {
-        "image": "assets/img/work/p05-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p05-3.jpg"
       },
       {
-        "image": "assets/img/work/p05-4.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p05-4.jpg"
       }
     ]
   },
@@ -139,22 +103,16 @@
     "type": "VIDEO",
     "year": "2025",
     "line": "Placeholder — live session.",
-    "cover": "assets/img/work/p06-1.jpg",
+    "cover": "/assets/img/work/dsc08808.jpg",
     "media": [
       {
-        "image": "",
-        "video_link": "",
-        "video_file": "assets/video/placeholder-loop.mp4"
+        "video_file": "/assets/video/placeholder-loop.mp4"
       },
       {
-        "image": "assets/img/work/p06-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p06-2.jpg"
       },
       {
-        "image": "assets/img/work/p06-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p06-3.jpg"
       }
     ]
   },
@@ -163,27 +121,19 @@
     "type": "PHOTO",
     "year": "2024",
     "line": "Placeholder — cover artwork shoot.",
-    "cover": "assets/img/work/p07-1.jpg",
+    "cover": "/assets/img/work/p07-1.jpg",
     "media": [
       {
-        "image": "assets/img/work/p07-1.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p07-1.jpg"
       },
       {
-        "image": "assets/img/work/p07-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p07-2.jpg"
       },
       {
-        "image": "assets/img/work/p07-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p07-3.jpg"
       },
       {
-        "image": "assets/img/work/p07-4.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p07-4.jpg"
       }
     ]
   },
@@ -192,22 +142,16 @@
     "type": "VIDEO",
     "year": "2024",
     "line": "Placeholder — visualiser.",
-    "cover": "assets/img/work/p08-1.jpg",
+    "cover": "/assets/img/work/p08-1.jpg",
     "media": [
       {
-        "image": "",
-        "video_link": "",
-        "video_file": "assets/video/placeholder-loop.mp4"
+        "video_file": "/assets/video/placeholder-loop.mp4"
       },
       {
-        "image": "assets/img/work/p08-2.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p08-2.jpg"
       },
       {
-        "image": "assets/img/work/p08-3.jpg",
-        "video_link": "",
-        "video_file": ""
+        "image": "/assets/img/work/p08-3.jpg"
       }
     ]
   }
