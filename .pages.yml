@@ -5,10 +5,10 @@ settings:
   commit:
     identity: app
     templates:
-      create: "Add {path} (via Pages CMS, {userName})"
-      update: "Update {path} (via Pages CMS, {userName})"
-      delete: "Delete {path} (via Pages CMS, {userName})"
-      rename: "Rename {oldPath} to {newPath} (via Pages CMS, {userName})"
+      create: "Add {path} (via Pages CMS)"
+      update: "Update {path} (via Pages CMS)"
+      delete: "Delete {path} (via Pages CMS)"
+      rename: "Rename {oldPath} to {newPath} (via Pages CMS)"
 
 media:
   - name: work
