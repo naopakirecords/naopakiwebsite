@@ -16,6 +16,10 @@
     "darkness": 25,
     "blur": true
   },
+  "texts": {
+    "slogan": "If you turn the world upside down or inside out, you'll find us.",
+    "slogan_font": "mono"
+  },
   "about": {
     "statement": "Naopaki means *inside out*. Backwards. The wrong way round. We are a three-person crew making photographs and moving images that keep the *seams showing* — raw light, real places, no polish for the sake of polish.",
     "we_make": "Photoshoots\nMusic Videos\nVisualisers\nPress & Cover Art\nSocial Media Content",
@@ -45,9 +49,5 @@
   },
   "sound": {
     "enabled": false
-  },
-  "texts": {
-    "slogan": "If you turn the world upside down or inside out, you'll find us.",
-    "slogan_font": "gothic"
   }
 }
