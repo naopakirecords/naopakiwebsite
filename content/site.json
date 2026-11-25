@@ -29,11 +29,11 @@
       "link": "https://www.instagram.com/naopakirecords"
     },
     "tiktok": {
-      "handle": "@naopaki",
+      "handle": "NA",
       "link": "https://tiktok.com/"
     },
     "youtube": {
-      "handle": "@naopaki",
+      "handle": "NA",
       "link": "https://youtube.com/"
     }
   },
@@ -42,5 +42,8 @@
     "menu_name": "Store",
     "label": "[Restricted]",
     "sublabel": "WIP"
+  },
+  "sound": {
+    "enabled": false
   }
 }
