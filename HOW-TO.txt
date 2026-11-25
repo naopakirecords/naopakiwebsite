@@ -96,6 +96,11 @@ In the editor's left menu you'll find:
          down or inside out, you'll find us."). Leave empty to hide.
          Slogan size: 20-200 (100 = the first, very big version;
          default 55). It still shrinks automatically on phones.
+         Space between logo and slogan (px): measured from the bottom
+         of the logo's letters (the logo file has empty space built in,
+         which is taken into account). Default 14; 0 = touching.
+         Space between slogan and the small line under it (px):
+         default 18.
          Slogan font: Gothic (Pirata One) / Bold sans / Small mono.
        - Top bar middle (hidden on phones), the small line under the
          slogan, the two
@@ -327,6 +332,8 @@ I want to see the intro again
 8. CHANGE LOG (newest first). Add a line for every change.
 -------------------------------------------------------------------------
 
+2026-11-25  Slogan moved closer to the logo; space above and below it
+            editable in Pages CMS (Homepage -> Small texts).
 2026-11-25  Slogan made smaller (size 55) and its size editable in
             Pages CMS (Homepage -> Small texts -> Slogan size).
 2026-11-25  Slogan added under the logo ("If you turn the world upside

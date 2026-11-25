@@ -135,7 +135,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @keyframes logo-jit { 0% { transform: translate(2px, -1px); } 33% { transform: translate(-3px, 1px) skewX(-4deg); } 66% { transform: translate(1px, 0); } 100% { transform: none; } }
 /* slogan under the logo (text + font editable in Pages CMS) */
 .hero__slogan {
-  position: relative; margin: -10px 0 0; max-width: min(86vw, 980px);
+  position: relative;
+  /* distances in px (editable in Pages CMS), measured from the visible bottom of the logo's letters:
+     subtract the hero's 28px gap and the empty space built into the logo SVG (~4.3% of its width) */
+  margin: calc(var(--slogan-above, 14px) - 28px - min(86vw, 980px) * .0432) 0 calc(var(--slogan-below, 18px) - 28px); max-width: min(86vw, 980px);
   text-align: center; color: var(--bone); text-wrap: balance;
 }
 .hero__slogan.is-gothic { font-family: var(--black-letter); font-size: calc(clamp(22px, 2.9vw, 44px) * var(--slogan-scale, .55)); line-height: 1.15; }

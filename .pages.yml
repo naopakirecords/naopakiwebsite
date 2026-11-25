@@ -158,6 +158,20 @@ content:
             options:
               min: 20
               max: 200
+          - name: slogan_space_above
+            label: Space between logo and slogan (px)
+            type: number
+            description: "Measured from the bottom of the logo's letters. Default 14. 0 = touching; negative numbers overlap the logo."
+            options:
+              min: -80
+              max: 300
+          - name: slogan_space_below
+            label: Space between slogan and the small line under it (px)
+            type: number
+            description: Default 18.
+            options:
+              min: -40
+              max: 300
           - name: slogan_font
             label: Slogan font
             type: select

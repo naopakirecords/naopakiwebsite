@@ -133,6 +133,10 @@
     if (tx.slogan_size !== "" && tx.slogan_size != null && !isNaN(size)) {
       el.style.setProperty("--slogan-scale", Math.min(200, Math.max(20, size)) / 100);
     }
+    const px = (v, lo, hi) => (v === "" || v == null || isNaN(Number(v))) ? null : Math.min(hi, Math.max(lo, Number(v))) + "px";
+    const above = px(tx.slogan_space_above, -80, 300), below = px(tx.slogan_space_below, -40, 300);
+    if (above) el.style.setProperty("--slogan-above", above);
+    if (below) el.style.setProperty("--slogan-below", below);
     const f = tx.slogan_font;
     if (["gothic", "sans", "mono"].includes(f)) el.className = "hero__slogan is-" + f;
   })();
