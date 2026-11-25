@@ -129,6 +129,10 @@
       if (!v) { el.hidden = true; return; }
       el.textContent = v;
     }
+    const size = Number(tx.slogan_size);   // 100 = the original (very big) size
+    if (tx.slogan_size !== "" && tx.slogan_size != null && !isNaN(size)) {
+      el.style.setProperty("--slogan-scale", Math.min(200, Math.max(20, size)) / 100);
+    }
     const f = tx.slogan_font;
     if (["gothic", "sans", "mono"].includes(f)) el.className = "hero__slogan is-" + f;
   })();

@@ -151,6 +151,13 @@ content:
             label: Slogan under the logo
             type: text
             description: Leave empty to hide it.
+          - name: slogan_size
+            label: Slogan size (20-200)
+            type: number
+            description: "100 = the first, very big version. Default 55. It still scales down automatically on phones."
+            options:
+              min: 20
+              max: 200
           - name: slogan_font
             label: Slogan font
             type: select
