@@ -122,6 +122,16 @@
   const setText = (sel, val) => { if (val != null && String(val).trim() !== "") $(sel).innerHTML = withSeps(val); };
   setText("#txt-bar", tx.top_bar_middle);
   setText("#txt-tagline", tx.hero_tagline);
+  (function slogan() {   // slogan under the logo: empty in the CMS = hidden
+    const el = $("#txt-slogan");
+    if (site && site.texts && "slogan" in site.texts) {
+      const v = String(site.texts.slogan || "").trim();
+      if (!v) { el.hidden = true; return; }
+      el.textContent = v;
+    }
+    const f = tx.slogan_font;
+    if (["gothic", "sans", "mono"].includes(f)) el.className = "hero__slogan is-" + f;
+  })();
   setText("#txt-corner-r", tx.hero_corner_right);
   setText("#txt-footer", tx.footer_line);
   if (tx.hero_corner_left != null && String(tx.hero_corner_left).trim() !== "") {

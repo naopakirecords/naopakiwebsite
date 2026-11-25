@@ -92,7 +92,11 @@ In the editor's left menu you'll find:
        - Darkness: 0 = fully see-through, 100 = solid black (default 45).
        - Blur what's behind it: on/off.
      Small texts (labels, marquee, footer)
-       - Top bar middle (hidden on phones), line under the logo, the two
+       - Slogan under the logo (default: "If you turn the world upside
+         down or inside out, you'll find us."). Leave empty to hide.
+         Slogan font: Gothic (Pirata One) / Bold sans / Small mono.
+       - Top bar middle (hidden on phones), the small line under the
+         slogan, the two
          bottom corners of the homepage, the scrolling strip (marquee)
          and the footer line.
        - The symbols / † ✝ ✕ ⛧ · are shown dimmed automatically.
@@ -321,6 +325,9 @@ I want to see the intro again
 8. CHANGE LOG (newest first). Add a line for every change.
 -------------------------------------------------------------------------
 
+2026-11-25  Slogan added under the logo ("If you turn the world upside
+            down or inside out, you'll find us."), editable in Pages CMS
+            (Homepage -> Small texts -> Slogan) with a font choice.
 2026-11-24  Phones with Reduce motion on: slideshow and marquee now keep
             running (soft fades); other effects pause. New switch in Look
             & effects: "Respect visitors' Reduce motion setting".

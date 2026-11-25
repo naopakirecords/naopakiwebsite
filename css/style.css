@@ -133,6 +133,14 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .hero__logo.is-glitching .hero__ghost--a { opacity: .55; transform: translate(-7px, 2px); clip-path: inset(18% 0 52% 0); }
 .hero__logo.is-glitching .hero__ghost--b { opacity: .45; transform: translate(6px, -2px); clip-path: inset(61% 0 12% 0); filter: brightness(1.2); }
 @keyframes logo-jit { 0% { transform: translate(2px, -1px); } 33% { transform: translate(-3px, 1px) skewX(-4deg); } 66% { transform: translate(1px, 0); } 100% { transform: none; } }
+/* slogan under the logo (text + font editable in Pages CMS) */
+.hero__slogan {
+  position: relative; margin: -6px 0 0; max-width: min(86vw, 980px);
+  text-align: center; color: var(--bone); text-wrap: balance;
+}
+.hero__slogan.is-gothic { font-family: var(--black-letter); font-size: clamp(22px, 2.9vw, 44px); line-height: 1.1; }
+.hero__slogan.is-sans { font-family: var(--sans); font-weight: 700; text-transform: uppercase; letter-spacing: -.02em; font-size: clamp(16px, 2vw, 28px); line-height: 1.1; }
+.hero__slogan.is-mono { font-family: var(--mono); text-transform: uppercase; letter-spacing: .12em; font-size: clamp(11px, 1.1vw, 14px); line-height: 1.6; }
 .hero__tag { position: relative; margin: 0; color: var(--bone); }
 .hero__tag span { color: var(--dim); margin: 0 .6em; }
 .hero__corner { position: absolute; bottom: 24px; color: var(--dim); }

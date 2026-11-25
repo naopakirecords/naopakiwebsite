@@ -147,8 +147,20 @@ content:
           - name: top_bar_middle
             label: Top bar, middle (hidden on phones)
             type: string
+          - name: slogan
+            label: Slogan under the logo
+            type: text
+            description: Leave empty to hide it.
+          - name: slogan_font
+            label: Slogan font
+            type: select
+            options:
+              values:
+                - { name: gothic, label: Gothic (Pirata One) }
+                - { name: sans, label: Bold sans (Helvetica) }
+                - { name: mono, label: Small mono (like the labels) }
           - name: hero_tagline
-            label: Line under the logo
+            label: Small line under the slogan
             type: string
           - name: hero_corner_left
             label: Bottom-left corner of the homepage
